@@ -2,19 +2,6 @@ import { createAction } from '@reduxjs/toolkit';
 
 // --------------------------------------------------------------------------------------
 
-// const addContactSuccess = createAction(
-//   'phoneBook/addSuccess',
-//   ({ name, phone }) => ({
-//     payload: {
-//       contact: {
-//         name,
-//         phone,
-
-//       },
-//     },
-//   }),
-// );
-
 const addContactRequest = createAction('phoneBook/addRequest');
 const addContactSuccess = createAction('phoneBook/addSuccess');
 const addContactError = createAction('phoneBook/addError');
@@ -23,7 +10,10 @@ const fetchContactsRequest = createAction('phoneBook/fetchRequest');
 const fetchContactsSuccess = createAction('phoneBook/fetchSuccess');
 const fetchContactsError = createAction('phoneBook/fetchError');
 
-const removeContact = createAction('phoneBook/removeContact');
+const removeContactsRequest = createAction('phoneBook/removeRequest');
+const removeContactsSuccess = createAction('phoneBook/removeSuccess');
+const removeContactsError = createAction('phoneBook/removeError');
+
 const changeFilter = createAction('phoneBook/changeFilter');
 
 const changeTheme = createAction('phoneBook/changeTheme');
@@ -37,7 +27,10 @@ export default {
   fetchContactsSuccess,
   fetchContactsError,
   //
-  removeContact,
+  removeContactsRequest,
+  removeContactsSuccess,
+  removeContactsError,
+  //
   changeFilter,
   changeTheme,
 };

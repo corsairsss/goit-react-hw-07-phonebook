@@ -10,11 +10,24 @@ const onRemoveContact = (state, { payload }) =>
 
 const items = createReducer([], {
   [phoneBookActions.addContactSuccess]: onAddContact,
-  [phoneBookActions.removeContact]: onRemoveContact,
+  [phoneBookActions.fetchContactsSuccess]: (state, { payload }) => payload,
+  [phoneBookActions.removeContactsSuccess]: onRemoveContact,
 });
 
 const filter = createReducer('', {
   [phoneBookActions.changeFilter]: (state, { payload }) => payload,
 });
 
-export default combineReducers({ items, filter });
+const loading = createReducer(false, {
+  [phoneBookActions.addContactRequest]: () => true,
+  [phoneBookActions.addContactSuccess]: () => false,
+  [phoneBookActions.addContactError]: () => false,
+  [phoneBookActions.fetchContactsRequest]: () => true,
+  [phoneBookActions.fetchContactsSuccess]: () => false,
+  [phoneBookActions.fetchContactsError]: () => false,
+  [phoneBookActions.removeContactsRequest]: () => true,
+  [phoneBookActions.removeContactsSuccess]: () => false,
+  [phoneBookActions.removeContactsError]: () => false,
+});
+
+export default combineReducers({ items, filter, loading });

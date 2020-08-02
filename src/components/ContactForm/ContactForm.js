@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import phoneBookSelectors from '../../redux/phoneBookSelectors.js';
 import phoneBookOperation from '../../redux/phoneBookOperation.js';
+
 import defaultState from './defaultState.js';
 
 import s from './ContactForm.module.css';
@@ -16,6 +18,14 @@ class ContactForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    const contacts = this.props.contacts;
+    const phone = this.state.phone;
+    const isPhoneInContacts = contacts.find(contact => contact.phone === phone);
+    if (isPhoneInContacts || phone === '') {
+      alert('Contact Already Exist or Number,Name are Empty');
+      return;
+    }
+
     const { onAddContact } = this.props;
     onAddContact(this.state);
     this.setState(defaultState);
@@ -54,9 +64,14 @@ class ContactForm extends Component {
     );
   }
 }
+const mSTP = state => {
+  return {
+    contacts: phoneBookSelectors.getContacts(state),
+  };
+};
 
-const mapDispatchToProps = {
+const mDTP = {
   onAddContact: phoneBookOperation.addContact,
 };
 
-export default connect(null, mapDispatchToProps)(ContactForm);
+export default connect(mSTP, mDTP)(ContactForm);

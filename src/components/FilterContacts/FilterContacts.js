@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import phoneBookSelectors from '../../redux/phoneBookSelectors.js';
 import phoneBookAction from '../../redux/phoneBookActions.js';
 
 import s from './FilterContacts.module.css';
@@ -22,7 +23,7 @@ function FilterContacts({ value, onChangeFilter }) {
 
 const mapStateToProps = state => {
   return {
-    value: state.contacts.filter,
+    value: phoneBookSelectors.getFilter(state),
   };
 };
 

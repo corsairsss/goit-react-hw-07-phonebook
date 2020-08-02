@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import phoneBookSelectors from '../../redux/phoneBookSelectors.js';
+
 import themeConfig from '../../configStyles/configStyle.js';
 
 import s from './Section.module.css';
@@ -16,7 +18,7 @@ const Section = ({ theme, title, children }) => {
 
 const mapStateToProps = state => {
   return {
-    theme: state.PhBookTheme.theme,
+    theme: phoneBookSelectors.getTheme(state),
   };
 };
 

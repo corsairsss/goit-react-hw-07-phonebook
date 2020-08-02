@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import phoneBookSelectors from '../../redux/phoneBookSelectors.js';
 import ContactItem from '../ContactItem/ContactItem.js';
 
 import s from './ContactList.module.css';
@@ -15,14 +16,10 @@ const ContactList = ({ list }) => {
   );
 };
 
-const mapStateToProps = state => {
-  const { items: contacts, filter } = state.contacts;
-  const filtredList = contacts.filter(({ name }) =>
-    name.toLocaleLowerCase().includes(filter.toLocaleLowerCase()),
-  );
+const mSTP = state => {
   return {
-    list: filtredList,
+    list: phoneBookSelectors.getConatctList(state),
   };
 };
 
-export default connect(mapStateToProps)(ContactList);
+export default connect(mSTP)(ContactList);
